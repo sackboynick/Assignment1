@@ -1,0 +1,81 @@
+@page "/AddAdultToFamily/{AdultId:int}"
+@using Models
+@using Data
+@inject IData _data;
+@inject NavigationManager _navigationManager;
+<h3>AddAdultToFamily</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Person ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Sex</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Adult item in _adults)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.Sex</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<p hidden="@_error">THE ADULT ALREADY BELONG TO A FAMILY</p>
+<EditForm Model="@_adult" OnValidSubmit="@AddAdult">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+<div class="form-group">Adult Id:<br>
+    <InputNumber @bind-Value="@_adult"></InputNumber>
+</div>
+<p class="actions">
+    <button class="btn btn-outline-dark" type="submit">Add adult</button>
+</p>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int AdultId { get; set; }
+
+    private IList<Adult> _adults;
+    private Family _familyToEdit;
+    private int _adult;
+
+    private bool _error;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _familyToEdit = _data.GetFamilyFromAdult(AdultId);
+        _adults = _data.GetAdults();
+        _error=true;
+    }
+
+    private void AddAdult()
+    {
+        bool adultAlreadyFamily = false;
+        Adult adultToAdd = _data.GetAdult(_adult);
+        foreach (Family family in _data.GetFamilies())
+        {
+            foreach (Adult xAdult in family.Adults)
+            {
+                if (xAdult.Equals(adultToAdd))
+                    adultAlreadyFamily = true;
+            }
+        }
+        if (adultAlreadyFamily)
+            _error = false;
+        else
+        {
+            _familyToEdit.Adults.Add(adultToAdd);
+            _data.UpdateFamily(_familyToEdit);
+            _navigationManager.NavigateTo($"FamilyInfoEdit/{AdultId}");
+        }
+
+    }
+}

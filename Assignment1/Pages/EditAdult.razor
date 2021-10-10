@@ -1,0 +1,59 @@
+@page "/EditAdult/{AdultId:int}"
+
+@using Models
+@using Data
+
+@inject IData IData
+@inject NavigationManager NavigationManager;
+
+<h3>Edit Adult</h3>
+
+
+<EditForm Model="@_adultToEdit" OnValidSubmit="@UpdateAdult">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">First Name: <br/>
+        <InputTextArea rows="1" @bind-Value="_adultToEdit.FirstName"></InputTextArea>
+    </div>
+    <div class="form-group">Last Name: <br/>
+        <InputTextArea rows="1" @bind-Value="_adultToEdit.LastName"></InputTextArea>
+    </div>
+    <div class="form-group">Haircolor: <br/>
+        <InputTextArea rows="1" @bind-Value="_adultToEdit.HairColor"></InputTextArea>
+    </div>
+    <div class="form-group">Eyecolor: <br/>
+        <InputTextArea rows="1" @bind-Value="_adultToEdit.EyeColor"></InputTextArea>
+    </div>
+    <div class="form-group">Age: <br/>
+        <InputNumber @bind-Value="_adultToEdit.Age"></InputNumber>
+    </div>
+    <div class="form-group">Weight: <br/>
+        <InputNumber @bind-Value="_adultToEdit.Weight"></InputNumber>
+    </div>
+    <div class="form-group">Height: <br/>
+        <InputNumber @bind-Value="_adultToEdit.Height"></InputNumber>
+    </div>
+
+    
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Update</button>
+    </p>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int AdultId { get; set; }
+    
+    private Adult _adultToEdit;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _adultToEdit = IData.GetAdult(AdultId);
+    }
+
+    private void UpdateAdult()
+    {
+        IData.UpdateAdult(_adultToEdit);
+        NavigationManager.NavigateTo("/Adults");
+    }
+}

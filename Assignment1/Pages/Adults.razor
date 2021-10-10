@@ -1,0 +1,148 @@
+@page "/Adults"
+
+@using Data
+@using Models
+@inject IData _data
+@inject NavigationManager _navigationManager;
+
+<h3>Adults</h3>
+
+<p>
+    Filter by Id: <input type="number" @onchange="@(arg => FilterById(arg))" style="width: 50px"/>
+</p>
+
+<p>
+    Filter by sex:
+    <select class="form-control selectpicker" @onchange="@(arg => FilterBySex(arg))" style="width: 100px">
+        <option> </option>
+        <option>M</option>
+        <option>F</option>
+    </select>
+</p>
+
+<button @onclick="DeleteFilters">Delete all filters</button>
+
+@if (_adultsToShow == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!_adultsToShow.Any())
+{
+    <p><em>No Adults items exist. Please add some.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Person ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Haircolor</th>
+            <th>Eyecolor</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Sex</th>
+            <th>JobTitle</th>
+            <th>Salary</th>
+            <th>Edit</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Adult item in _adultsToShow)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.HairColor</td>
+                <td>@item.EyeColor</td>
+                <td>@item.Age</td>
+                <td>@item.Weight</td>
+                <td>@item.Height</td>
+                <td>@item.Sex</td>
+                <td>@item.JobTitle.JobTitle</td>
+                <td>@item.JobTitle.Salary</td>
+                <td>
+                    <button @onclick="@(() => Edit(item.Id))">
+                        <i class="oi oi-pencil" style="color:#1b6ec2"></i>
+                    </button>
+                </td>
+                <td>
+                    
+                    <button @onclick="@(() => Remove(item.Id))">
+                        <i class="oi oi-trash" style="color:#1b6ec2"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<Adult> _adults, _adultsToShow;
+    private int? filterById;
+    private string? filterBySex;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _adults = _data.GetAdults();
+        _adultsToShow = _adults;
+    }
+
+
+    private void FilterById(ChangeEventArgs evt)
+    {
+        filterById = null;
+        if (evt.Value != null)
+            filterById = int.Parse(evt.Value.ToString() ?? string.Empty);
+        ExecuteFilter();
+    }
+
+    private void DeleteFilters()
+    {
+        _adultsToShow = _adults;
+        filterById = null;
+        filterBySex = null;
+    }
+    private void FilterBySex(ChangeEventArgs evt)
+    {
+        filterBySex = null;
+        try
+        {
+            if(evt.Value!=null && evt.Value.ToString()!=" ")
+            filterBySex = evt.Value.ToString();
+        }
+        catch (Exception)
+        {
+    // ignored
+        }
+        ExecuteFilter();
+
+    }
+
+    private void ExecuteFilter()
+    {
+        _adultsToShow = _adults.Where(t =>
+            (filterById != null && t.Id == filterById || filterById == null) &&
+            (filterBySex != null && t.Sex == filterBySex || filterBySex == null)).ToList();
+    }
+
+
+    private void Edit(int id)
+    {
+        _navigationManager.NavigateTo($"EditAdult/{id}");
+    }
+
+    private void Remove(int itemId)
+    {
+        Adult adultToRemove = _adults.First((adult => adult.Id ==itemId));
+        _data.RemoveAdult(adultToRemove);
+        _adults.Remove(adultToRemove);
+        _adultsToShow.Remove(adultToRemove);
+    }
+
+}
