@@ -1,0 +1,165 @@
+@page "/Adults"
+
+@using Data
+@using Models
+@inject IData _data
+@inject NavigationManager _navigationManager;
+
+<h3>Adults</h3>
+
+<p>
+    Filter by Id: <input type="number" @onchange="@(arg => FilterById(arg))" style="width: 50px"/>
+</p>
+
+<p>
+    Filter by sex:
+    <select class="form-control selectpicker" @onchange="@(arg => FilterBySex(arg))" style="width: 100px">
+        <option> </option>
+        <option>M</option>
+        <option>F</option>
+    </select>
+</p>
+
+<p>@_errorMessage</p>
+<button @onclick="DeleteFilters">Delete all filters</button>
+
+@if (_adultsToShow == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!_adultsToShow.Any())
+{
+    <p><em>No Adults items exist. Please add some.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Person ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Haircolor</th>
+            <th>Eyecolor</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Sex</th>
+            <th>JobTitle</th>
+            <th>Salary</th>
+            <AuthorizeView Policy="RequireAdmin">
+            <th>Edit</th>
+            <th>Remove</th>
+            </AuthorizeView>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Adult item in _adultsToShow)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.HairColor</td>
+                <td>@item.EyeColor</td>
+                <td>@item.Age</td>
+                <td>@item.Weight</td>
+                <td>@item.Height</td>
+                <td>@item.Sex</td>
+                <td>@item.JobTitle.JobTitle</td>
+                <td>@item.JobTitle.Salary</td>
+                <AuthorizeView Policy="RequireAdmin">
+                <td>
+                    <button @onclick="@(() => Edit(item.Id))">
+                        <i class="oi oi-pencil" style="color:#1b6ec2"></i>
+                    </button>
+                </td>
+                <td>
+                    
+                    <button @onclick="@(() => Remove(item.Id))">
+                        <i class="oi oi-trash" style="color:#1b6ec2"></i>
+                    </button>
+                </td>
+                </AuthorizeView>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<Adult> _adults, _adultsToShow;
+    private int? _filterById;
+    private string _filterBySex;
+    private string _errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _adults = _data.GetAdults().Result;
+        _adultsToShow = _adults;
+        _errorMessage = "";
+    }
+
+
+    private void FilterById(ChangeEventArgs evt)
+    {
+        _filterById = null;
+        try
+        {
+            if (evt.Value != null)
+                _filterById = int.Parse(evt.Value.ToString() ?? string.Empty);
+            ExecuteFilter();
+            _errorMessage = "";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _errorMessage = "Please insert only legal values";
+        }
+        
+    }
+
+    private void DeleteFilters()
+    {
+        _adultsToShow = _adults;
+        _filterById = null;
+        _filterBySex = null;
+    }
+    private void FilterBySex(ChangeEventArgs evt)
+    {
+        _filterBySex = null;
+        try
+        {
+            if(evt.Value!=null && evt.Value.ToString()!=" ")
+            _filterBySex = evt.Value.ToString();
+        }
+        catch (Exception)
+        {
+    // ignored
+        }
+        ExecuteFilter();
+
+    }
+
+    private void ExecuteFilter()
+    {
+        _adultsToShow = _adults.Where(t =>
+            (_filterById != null && t.Id == _filterById || _filterById == null) &&
+            (_filterBySex != null && t.Sex == _filterBySex || _filterBySex == null)).ToList();
+    }
+
+
+    private void Edit(int id)
+    {
+        _navigationManager.NavigateTo($"EditAdult/{id}");
+    }
+
+    private void Remove(int itemId)
+    {
+        Adult adultToRemove = _adults.First((adult => adult.Id ==itemId));
+        _data.RemoveAdult(itemId);
+        _adults.Remove(adultToRemove);
+        _adultsToShow.Remove(adultToRemove);
+    }
+
+}

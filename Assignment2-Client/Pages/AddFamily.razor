@@ -1,0 +1,71 @@
+@page "/AddFamily"
+@using Data
+@using Microsoft.AspNetCore.Components
+@using Models
+@attribute [Authorize(Policy = "RequireAdmin")]
+
+@inject IData _data
+@inject NavigationManager _navigationManager;
+
+<h3>AddFamily</h3>
+
+<EditForm Model="@newFamily" OnValidSubmit="@AddNewFamily">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">Street Name: <br/>
+            <InputTextArea rows="1" @bind-Value="newFamily.StreetName"></InputTextArea>
+        </div>
+    <div class="form-group">House Number:<br>
+        <InputNumber  @bind-Value="newFamily.HouseNumber"></InputNumber>
+    </div>
+    
+    <p>There must be at least one adult in a family.</p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Person ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Sex</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Adult item in _adults)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Sex</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="form-group">Adult Id:<br>
+            <InputNumber  @bind-Value="@_adultId"></InputNumber>
+        </div>
+
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create</button>
+    </p>
+</EditForm>
+
+@code {
+    private IList<Adult> _adults;
+    Family newFamily = new();
+    int _adultId;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _adults = _data.GetAdults().Result;
+    }
+
+    private void AddNewFamily()
+    {
+        newFamily.Adults.Add(_data.GetAdult(_adultId).Result);
+        _data.AddFamily(newFamily);
+        _navigationManager.NavigateTo("/Families");
+    }
+
+}

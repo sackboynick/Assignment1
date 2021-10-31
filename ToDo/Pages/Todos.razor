@@ -1,0 +1,132 @@
+@page "/Todos"
+@using ToDo.Models
+@using ToDo.Data
+@inject ITodoData TodoData
+@inject NavigationManager NavigationManager;
+
+<h3>Todos</h3>
+
+<p>
+    Filter by User Id: <input type="number" @onchange="@(arg => FilterById(arg))" style="width: 50px"/>
+</p>
+
+<p>
+    Filter by completed status:
+    <select class="form-control selectpicker" @onchange="@((arg) => FilterByCompletedStatus(arg))" style="width: 100px">
+        <option>Both</option>
+        <option>True</option>
+        <option>False</option>
+    </select>
+</p>
+
+@if (_todosToShow == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!_todosToShow.Any())
+{
+    <p><em>No ToDo items exist. Please add some.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Todo ID</th>
+            <th>Title</th>
+            <th>Completed</th>
+            <th></th>
+            <th>Remove</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in _todosToShow)
+        {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.TodoId</td>
+                <td>@item.Title</td>
+                <td>@item.IsCompleted</td>
+                <td>
+                    <input type="checkbox" checked="@item.IsCompleted" @onchange="@((arg) =>CompletedChange(arg,item))"/>
+                </td>
+                <td>
+                    <button @onclick="@(() => RemoveTodo(item.TodoId))">
+                        <i class="oi oi-trash" style="color: red"></i>
+                    </button>
+                </td>
+                <td>
+                    <button @onclick="@(() => Edit(item.TodoId))">
+                        <i class="oi oi-pencil" style="color:#1b6ec2"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<Todo> _todos,_todosToShow;
+    private int? filterById;
+    private bool? filterByStatus;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _todos = TodoData.GetTodos();
+        _todosToShow = _todos;
+    }
+
+    private void RemoveTodo(int todoId)
+    {
+        Todo todoToRemove = _todos.First(t => t.TodoId == todoId);
+        TodoData.RemoveTodo(todoId);
+        _todos.Remove(todoToRemove);
+        _todosToShow.Remove(todoToRemove);
+    }
+
+    private void CompletedChange(ChangeEventArgs changeEventArgs, Todo todo)
+    {
+        if (changeEventArgs.Value != null) todo.IsCompleted = (bool) changeEventArgs.Value;
+        TodoData.Update(todo);
+    }
+
+    private void FilterById(ChangeEventArgs evt)
+    {
+        filterById = null;
+        if (evt.Value != null) 
+            filterById = int.Parse(evt.Value.ToString() ?? string.Empty);
+        ExecuteFilter();
+    }
+
+    private void FilterByCompletedStatus(ChangeEventArgs evt)
+    {
+        filterByStatus = null;
+        try
+        {
+            filterByStatus = bool.Parse(evt.Value.ToString());
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+        ExecuteFilter();
+
+    }
+
+    private void ExecuteFilter()
+    {
+        _todosToShow = _todos.Where(t =>
+            (filterById != null && t.UserId==filterById || filterById==null) && 
+            (filterByStatus!=null && t.IsCompleted==filterByStatus || filterByStatus==null)).ToList();
+    }
+
+
+    private void Edit(int id)
+    {
+        NavigationManager.NavigateTo($"Edit/{id}");
+    }
+
+}

@@ -1,0 +1,21 @@
+@page "/Security"
+@inject AuthenticationStateProvider _authenticationStateProvider
+<AuthorizeView>
+    <h3>Hello
+        @if (context.User.Identity != null)
+        {
+            @context.User.Identity.Name
+        }
+    </h3>
+</AuthorizeView>
+
+<p>This piece of text is visible is visible for everyone</p>
+<AuthorizeView Policy="RequireLogIn">
+    <p>This piece of text is visible only for users and admins.</p>
+</AuthorizeView>
+<AuthorizeView Policy="RequireAdmin">
+    <p>This is visible only for admins and above</p>
+</AuthorizeView>
+
+@code {
+}

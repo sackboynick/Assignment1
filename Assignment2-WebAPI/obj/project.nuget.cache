@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "/0I4E4aCoVrmF1Wfn0Ir9GFEwPUjGjXNAquw1ogu2xkoW665qfkAxwmRHjwhgvYBD2gJn1U0KoHr+ituN4Ht3A==",
+  "success": true,
+  "projectFilePath": "/home/c/Desktop/RiderProjects/WebApplication/Assignment2-WebAPI/Assignment2-WebAPI.csproj",
+  "expectedPackageFiles": [
+    "/home/c/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/home/c/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/c/.nuget/packages/swashbuckle.aspnetcore/5.6.3/swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "/home/c/.nuget/packages/swashbuckle.aspnetcore.swagger/5.6.3/swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "/home/c/.nuget/packages/swashbuckle.aspnetcore.swaggergen/5.6.3/swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "/home/c/.nuget/packages/swashbuckle.aspnetcore.swaggerui/5.6.3/swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

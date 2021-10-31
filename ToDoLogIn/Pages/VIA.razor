@@ -1,0 +1,24 @@
+@page "/VIA"
+@attribute [Authorize(Policy = "MustBeVIA")]
+@inject NavigationManager _navigationManager;
+
+<h3>VIA</h3>
+<p>This page can only be viewed if your domain is VIA</p>
+
+
+
+@code {
+    [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        var user = (await AuthStat).User;
+        if(user.Identity is {IsAuthenticated: false })
+        {
+            _navigationManager.NavigateTo($"/Login");
+        }
+
+}
+    
+}
