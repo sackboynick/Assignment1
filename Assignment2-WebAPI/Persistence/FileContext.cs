@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using Models;
+using Assignment2_WebAPI.Models;
 
-namespace FileData
+namespace Assignment2_WebAPI.Persistence
 {
     public class FileContext
     {

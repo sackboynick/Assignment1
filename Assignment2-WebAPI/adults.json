@@ -1,17 +1,17 @@
 [
   {
     "JobTitle": {
-      "JobTitle": "Mascot",
-      "Salary": 99821
+      "JobTitle": "string",
+      "Salary": 0
     },
     "Id": 0,
     "FirstName": "Yasmine",
     "LastName": "Baxter",
-    "HairColor": "Black",
+    "HairColor": "Red",
     "EyeColor": "Brown",
-    "Age": 58,
-    "Weight": 39.8,
-    "Height": 174,
+    "Age": 61,
+    "Weight": 50,
+    "Height": 52,
     "Sex": "F"
   },
   {
@@ -81,12 +81,12 @@
     },
     "Id": 5,
     "FirstName": "Soham",
-    "LastName": "Fitzgerald",
+    "LastName": "Try",
     "HairColor": "Black",
     "EyeColor": "Grey",
-    "Age": 48,
-    "Weight": 131.6,
-    "Height": 177,
+    "Age": 50,
+    "Weight": 50,
+    "Height": 50,
     "Sex": "M"
   },
   {
@@ -222,6 +222,21 @@
     "Age": 44,
     "Weight": 81.8,
     "Height": 172,
+    "Sex": "M"
+  },
+  {
+    "JobTitle": {
+      "JobTitle": "Assistant",
+      "Salary": 130
+    },
+    "Id": 24,
+    "FirstName": "Nicola",
+    "LastName": "Santolini",
+    "HairColor": "Brown",
+    "EyeColor": "Brown",
+    "Age": 20,
+    "Weight": 72,
+    "Height": 178,
     "Sex": "M"
   },
   {

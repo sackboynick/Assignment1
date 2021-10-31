@@ -80,6 +80,12 @@
         "Species": "Cat",
         "Name": "Lulu",
         "Age": 3
+      },
+      {
+        "Id": 1,
+        "Species": "dog",
+        "Name": "Dog",
+        "Age": 2
       }
     ]
   },
@@ -202,7 +208,20 @@
         "Sex": "F"
       }
     ],
-    "Pets": []
+    "Pets": [
+      {
+        "Id": 0,
+        "Species": "Cat",
+        "Name": "Sissy",
+        "Age": 2
+      },
+      {
+        "Id": 1,
+        "Species": "Cat",
+        "Name": "Romeo",
+        "Age": 4
+      }
+    ]
   },
   {
     "StreetName": "William Street",
