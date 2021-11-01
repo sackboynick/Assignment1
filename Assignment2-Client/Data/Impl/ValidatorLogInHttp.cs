@@ -23,12 +23,11 @@ namespace Assignment2_Client.Data.Impl
             
             
             HttpResponseMessage response = await client.GetAsync("https://localhost:5001/LogIn?username="+userName+"&password="+password).ConfigureAwait(false);
-            Console.WriteLine(response);
             if(!response.IsSuccessStatusCode)
                 throw new Exception(@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             
             string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            Console.WriteLine(result);
+
             User user = JsonSerializer.Deserialize<User>(result, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase

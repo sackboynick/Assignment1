@@ -1,17 +1,17 @@
 [
   {
     "JobTitle": {
-      "JobTitle": "string",
+      "JobTitle": "Engineer",
       "Salary": 0
     },
     "Id": 0,
     "FirstName": "Yasmine",
     "LastName": "Baxter",
-    "HairColor": "brown",
+    "HairColor": "Red",
     "EyeColor": "Brown",
     "Age": 61,
     "Weight": 50,
-    "Height": 50,
+    "Height": 52,
     "Sex": "F"
   },
   {
@@ -223,20 +223,22 @@
     "Weight": 81.8,
     "Height": 172,
     "Sex": "M"
-  },{
-  "JobTitle": {
-    "JobTitle": "Assistant",
-    "Salary": 130
   },
-  "Id": 24,
-  "FirstName": "Nicola",
-  "LastName": "Santolini",
-  "HairColor": "Brown",
-  "EyeColor": "Brown",
-  "Age": 20,
-  "Weight": 72,
-  "Height": 178,
-  "Sex": "M"},
+  {
+    "JobTitle": {
+      "JobTitle": "Assistant",
+      "Salary": 130
+    },
+    "Id": 24,
+    "FirstName": "Nicola",
+    "LastName": "Santolini",
+    "HairColor": "Brown",
+    "EyeColor": "Brown",
+    "Age": 20,
+    "Weight": 72,
+    "Height": 178,
+    "Sex": "M"
+  },
   {
     "JobTitle": {
       "JobTitle": "Engineer",

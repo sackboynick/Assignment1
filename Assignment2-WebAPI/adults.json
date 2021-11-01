@@ -1,17 +1,17 @@
 [
   {
     "JobTitle": {
-      "JobTitle": "Engineer",
+      "JobTitle": "string",
       "Salary": 0
     },
     "Id": 0,
     "FirstName": "Yasmine",
     "LastName": "Baxter",
-    "HairColor": "Red",
+    "HairColor": "string",
     "EyeColor": "Brown",
     "Age": 61,
-    "Weight": 50,
-    "Height": 52,
+    "Weight": 0,
+    "Height": 0,
     "Sex": "F"
   },
   {

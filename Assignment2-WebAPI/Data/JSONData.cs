@@ -94,7 +94,7 @@ namespace Assignment2_WebAPI.Data
             adultToUpdate.Height = adult.Height;
             adultToUpdate.HairColor = adult.HairColor;
             adultToUpdate.Age = adult.Age;
-            adult.EyeColor = adult.EyeColor;
+            adultToUpdate.EyeColor = adult.EyeColor;
             _fileContext.SaveChanges();
         }
 
