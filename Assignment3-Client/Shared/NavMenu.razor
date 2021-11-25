@@ -1,0 +1,51 @@
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">Assignment3-Client</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="adults">
+                <span class="oi oi-person" aria-hidden="true"></span> Adults
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="families">
+                <span class="oi oi-people" aria-hidden="true"></span> Families
+            </NavLink>
+        </li>
+        <AuthorizeView Policy="RequireAdmin">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="addAdult">
+                    <span class="oi oi-plus" aria-hidden="true"></span> AddAdult
+                </NavLink>
+            </li>
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="addFamily">
+                    <span class="oi oi-plus" aria-hidden="true"></span> AddFamily
+                </NavLink>
+            </li>
+        </AuthorizeView>
+
+    </ul>
+</div>
+
+@code {
+    private bool _collapseNavMenu = true;
+
+    private string NavMenuCssClass => _collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        _collapseNavMenu = !_collapseNavMenu;
+    }
+
+}

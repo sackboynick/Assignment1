@@ -1,0 +1,54 @@
+@page "/AddPetToFamily/{AdultId:int}"
+@using Microsoft.AspNetCore.Components
+@using Assignment3_Client.Data
+@using Assignment3_Client.Models
+@attribute [Authorize(Policy = "RequireAdmin")]
+@inject IData _data;
+@inject NavigationManager _navigationManager
+<h3>AddChildrenToFamily</h3>
+
+<EditForm Model="@_newPet" OnValidSubmit="@AddNewPet">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">Name: <br/>
+        <InputTextArea rows="1" @bind-Value="_newPet.Name"></InputTextArea>
+    </div>
+    <div class="form-group">Specie: <br/>
+        <InputTextArea rows="1" @bind-Value="_newPet.Species"></InputTextArea>
+    </div>
+    <div class="form-group">Age: <br/>
+        <InputNumber @bind-Value="_newPet.Age" ></InputNumber>
+    </div>
+
+    
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create</button>
+    </p>
+</EditForm>
+
+
+@code {
+    
+    [Parameter]
+    public int AdultId { get; set; }
+    
+    private Family _familyToEdit;
+
+    private Pet _newPet;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _familyToEdit = _data.GetFamilyFromAdult(AdultId).Result;
+        _newPet= new Pet();
+    }
+
+
+    private void AddNewPet()
+    {
+        _newPet.Id = _familyToEdit.Pets.Count;
+        _familyToEdit.Pets.Add(_newPet);
+        _navigationManager.NavigateTo($"FamilyInfoEdit/{AdultId}");
+        _data.UpdateFamily(_familyToEdit);
+    }
+
+}

@@ -25,7 +25,7 @@ namespace ToDoLogIn
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<ITodoData, TodoJsonData>();
+            services.AddSingleton<ITodoData, DatabaseDataRetriever>();
             services.AddScoped<IUserService, InMemoryUserService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 

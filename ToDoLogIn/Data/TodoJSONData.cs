@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using ToDoLogIn.Models;
 
 namespace ToDoLogIn.Data
@@ -25,32 +26,35 @@ namespace ToDoLogIn.Data
             }
         }
         
-        public IList<Todo> GetTodos()
+        public Task<List<Todo>> GetTodos()
         {
-            return new List<Todo>(_todos);
+            return Task.FromResult(new List<Todo>(_todos));
         }
 
-        public void AddTodo(Todo todo)
+        public Task AddTodo(Todo todo)
         {
             int max = _todos.Max(todo1 => todo1.TodoId);
             todo.TodoId = (++max);
             _todos.Add(todo);
             WriteTodosToFile();
+            return Task.CompletedTask;
         }
 
-        public void RemoveTodo(int todoId)
+        public Task RemoveTodo(int todoId)
         {
             Todo toRemove = _todos.First(t => t.TodoId == todoId);
             _todos.Remove(toRemove);
             WriteTodosToFile();
+            return Task.CompletedTask;
         }
 
-        public void Update(Todo todo)
+        public Task Update(Todo todo)
         {
             Todo toUpdate = _todos.First(t => t.TodoId == todo.TodoId);
             toUpdate.IsCompleted = todo.IsCompleted;
             toUpdate.Title = todo.Title;
             WriteTodosToFile();
+            return Task.CompletedTask;
         }
 
         public Todo Get(int id)

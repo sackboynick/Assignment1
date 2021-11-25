@@ -14,9 +14,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnotherTest", "AnotherTest\AnotherTest.csproj", "{E1BD1419-DE22-4D0D-B875-C8AFE18E0247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2-WebAPI", "Assignment2-WebAPI\Assignment2-WebAPI.csproj", "{D8EBC58A-B042-4AF6-9C35-BAD4D47BC9AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment3-WebAPI", "Assignment3-WebAPI\Assignment3-WebAPI.csproj", "{D8EBC58A-B042-4AF6-9C35-BAD4D47BC9AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2-Client", "Assignment2-Client\Assignment2-Client.csproj", "{FE3129FB-19AF-4358-BCFA-2049814106F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment3-Client", "Assignment3-Client\Assignment3-Client.csproj", "{FE3129FB-19AF-4358-BCFA-2049814106F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{9EA4F0C1-BC04-4A25-83B9-AFFCA645E5FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,5 +62,9 @@ Global
 		{FE3129FB-19AF-4358-BCFA-2049814106F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE3129FB-19AF-4358-BCFA-2049814106F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE3129FB-19AF-4358-BCFA-2049814106F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA4F0C1-BC04-4A25-83B9-AFFCA645E5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA4F0C1-BC04-4A25-83B9-AFFCA645E5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA4F0C1-BC04-4A25-83B9-AFFCA645E5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA4F0C1-BC04-4A25-83B9-AFFCA645E5FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

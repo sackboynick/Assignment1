@@ -113,7 +113,7 @@ using ToDoLogIn.Data;
 
     protected override async Task OnInitializedAsync()
     {
-        _todos = _todoData.GetTodos();
+        _todos = _todoData.GetTodos().Result;
         _todosToShow = _todos;
     }
 
