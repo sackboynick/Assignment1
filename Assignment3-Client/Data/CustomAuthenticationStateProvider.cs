@@ -48,6 +48,7 @@ namespace Assignment3_Client.Data
             if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
             ClaimsIdentity identity = new ClaimsIdentity();
+
             try
             {
                 User user = _userService.ValidateUser(username, password).Result;

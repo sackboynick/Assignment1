@@ -24,9 +24,9 @@ namespace Assignment3_Client
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddScoped<IUserService, ValidatorLogInHttp>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddSingleton<IData,HttpDataRetriever>();
-            services.AddScoped<IUserService, ValidatorLogInHttp>();
             
             services.AddAuthorization(options =>
                 options.AddPolicy("RequireAdmin", builder =>

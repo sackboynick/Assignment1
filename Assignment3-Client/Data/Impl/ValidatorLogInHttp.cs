@@ -11,6 +11,7 @@ namespace Assignment3_Client.Data.Impl
     {
         public async Task<User> ValidateUser(string userName, string password)
         {
+            
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
