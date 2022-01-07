@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace Assignment2_Client.Shared
+namespace Assignment3_Client.Shared
 {
     #line hidden
     using System;

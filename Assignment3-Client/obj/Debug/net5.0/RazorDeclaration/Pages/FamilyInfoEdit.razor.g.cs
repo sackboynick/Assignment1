@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace Assignment2_Client.Pages
+namespace Assignment3_Client.Pages
 {
     #line hidden
     using System;
@@ -126,9 +126,9 @@ using Assignment3_Client.Models;
         _streetName = _familyToEdit.StreetName;
         _houseNumber = _familyToEdit.HouseNumber;
 
-        _adults = _familyToEdit.Adults;
-        _children = _familyToEdit.Children;
-        _pets = _familyToEdit.Pets;
+        _adults = _familyToEdit.Adults.ToList();
+        _children = _familyToEdit.Children.ToList();
+        _pets = _familyToEdit.Pets.ToList();
 
         _addAdult = _adults.Count == 2;
         _addChild = _children.Count == 7;

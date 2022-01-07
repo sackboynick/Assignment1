@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace Assignment2_Client
+namespace Assignment3_Client
 {
     #line hidden
     using System;

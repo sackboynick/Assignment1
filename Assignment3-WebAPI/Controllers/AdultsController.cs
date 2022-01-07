@@ -42,38 +42,17 @@ namespace Assignment3_WebAPI.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<IList<Adult>>> GetAdults([FromQuery] int? adultId,[FromQuery] string sex )
+        public async Task<ActionResult<IList<Adult>>> GetAdults()
         {
             try
             {
 
                 IList<Adult> tempAdults = _data.GetAdults();
                 IList<Adult> adults = new List<Adult>();
-                if (adultId != null)
-                {
-                    adults.Add(tempAdults.First(adult => adult.Id == adultId));
-                }
-                else if (sex != null)
-                {
-                    foreach (Adult adult in tempAdults.ToList())
-                    {
-                        if (adult.Sex == sex)
-                        {
-                            adults.Add(adult);
-                            tempAdults.Remove(adult);
-                        }
-
-                    }
-
                     foreach (Adult adult in tempAdults.ToList())
                     {
                         adults.Add(adult);
                     }
-                }
-                else
-                {
-                    adults = tempAdults;
-                }
 
                 return Ok(adults);
             }

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>Assignment2_WebAPI</RootNamespace>
+        <RootNamespace>Assignment3_WebAPI</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

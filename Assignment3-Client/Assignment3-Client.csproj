@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>Assignment2_Client</RootNamespace>
+        <RootNamespace>Assignment3_Client</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

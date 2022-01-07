@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Assignment2-Client": {
+    "Assignment3-Client": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

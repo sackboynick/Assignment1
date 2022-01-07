@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace Assignment2_Client
+namespace Assignment3_Client
 {
     #line hidden
     using System;
@@ -69,14 +69,14 @@ using Microsoft.JSInterop;
 #line hidden
 #nullable disable
 #nullable restore
-#line 1 "/home/c/Desktop/RiderProjects/WebApplication/Assignment3-Client/App.razor"
+#line 9 "/home/c/Desktop/RiderProjects/WebApplication/Assignment3-Client/_Imports.razor"
 using Assignment3_Client;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "/home/c/Desktop/RiderProjects/WebApplication/Assignment3-Client/App.razor"
+#line 1 "/home/c/Desktop/RiderProjects/WebApplication/Assignment3-Client/App.razor"
 using Assignment3_Client.Shared;
 
 #line default
